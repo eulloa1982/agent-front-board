@@ -1,6 +1,8 @@
 import React from "react";
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "./utils/azureAuthUtil";
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 export default function App() {
   const { instance, accounts } = useMsal();
@@ -18,12 +20,12 @@ export default function App() {
   return (
     <div>
       {accounts.length > 0 ? (
-        <>
+        <Stack spacing={2} direction="row">
           <h1>Bienvenido, {accounts[0].name}</h1>
-          <button onClick={handleLogout}>Cerrar sesión</button>
-        </>
+          <Button onClick={handleLogout} variant="outlined">Sign Out</Button>
+        </Stack>
       ) : (
-        <button onClick={handleLogin}>Iniciar sesión</button>
+        <Button onClick={handleLogin} variant="outlined">Sign In</Button>
       )}
     </div>
   );
