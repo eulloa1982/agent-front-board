@@ -3,6 +3,7 @@ import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "./utils/azureAuthUtil";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Dashboard from "./components/dashBoard";
 
 export default function App() {
   const { instance, accounts } = useMsal();
@@ -23,9 +24,13 @@ export default function App() {
         <Stack spacing={2} direction="row">
           <h1>Bienvenido, {accounts[0].name}</h1>
           <Button onClick={handleLogout} variant="outlined">Sign Out</Button>
+          
         </Stack>
       ) : (
+        <div>
         <Button onClick={handleLogin} variant="outlined">Sign In</Button>
+        <Dashboard />
+        </div>
       )}
     </div>
   );
