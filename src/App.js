@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { CircularProgress, Button } from '@mui/material';
+import { CssBaseline, CircularProgress, Button } from '@mui/material';
 import { useMsal } from '@azure/msal-react';
 import DashboardLayout from './components/dashboardLayout';
 import DashboardPage from './components/dashboardPage';
 import MsalProviderWrapper from './utils/msalProviderWrapper'; // Importar el wrapper
 
 // Componente para gestionar la autenticación
-const AuthComponent = () => {
+const AuthComponent = ({ setAuthenticated }) => {
   const { instance, accounts } = useMsal();
   const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     if (accounts.length > 0) {
-      setAuthenticated(true);
+      setAuthenticated(true);  // Usuario autenticado
       setLoading(false);
     } else {
       setLoading(false);
     }
-  }, [accounts]);
+  }, [accounts, setAuthenticated]);
 
   const handleLogin = () => {
     instance.loginPopup().then((response) => {
@@ -42,7 +41,7 @@ const AuthComponent = () => {
 
   return (
     <>
-      {authenticated ? (
+      {accounts.length > 0 ? (
         <Button variant="contained" color="primary" onClick={handleLogout}>
           Logout
         </Button>
@@ -56,11 +55,19 @@ const AuthComponent = () => {
 };
 
 const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+
   return (
     <MsalProviderWrapper>
+      <CssBaseline />
       <DashboardLayout>
-        <AuthComponent />
-        <DashboardPage />
+        {/* Mostrar el login si no está autenticado */}
+        {!authenticated ? (
+          <AuthComponent setAuthenticated={setAuthenticated} />
+        ) : (
+          // Mostrar el Dashboard solo si el usuario está autenticado
+          <DashboardPage />
+        )}
       </DashboardLayout>
     </MsalProviderWrapper>
   );
