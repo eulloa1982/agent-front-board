@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CssBaseline, CircularProgress, Button } from '@mui/material';
+import { CircularProgress, Button } from '@mui/material';
 import { useMsal } from '@azure/msal-react';
 import DashboardLayout from './components/dashboardLayout';
 import DashboardPage from './components/dashboardPage';
@@ -58,7 +58,6 @@ const AuthComponent = () => {
 const App = () => {
   return (
     <MsalProviderWrapper>
-      <CssBaseline />
       <DashboardLayout>
         <AuthComponent />
         <DashboardPage />

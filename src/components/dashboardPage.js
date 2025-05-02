@@ -1,7 +1,5 @@
 // src/pages/DashboardPage.js
 import React from 'react';
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { Navigate } from 'react-router-dom';
 import { Box, Grid, Card, CardContent, Typography } from '@mui/material';
 import TicketsByDayBarChart from './ticketsByDayChart';
 import TicketsByAgentBarChart from './ticketsByAgentChart';
@@ -9,14 +7,7 @@ import CategoryPieChart from './categoryPieChart';
 import StatusPieChart from './statusPieChart';
 
 const DashboardPage = () => {
-  const isAuthenticated = useIsAuthenticated();
-  const { accounts } = useMsal();
-  const userEmail = accounts[0]?.username;
-
-  if (!isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-
+ 
   return (
     <Box sx={{ display: 'flex' }}>
       <Box sx={{ flex: 2, p: 2 }}>
@@ -73,12 +64,7 @@ const DashboardPage = () => {
           </Grid>
       </Box>
     
-      <Typography variant="h4" gutterBottom>
-        Bienvenido al Dashboard
-      </Typography>
-      <Typography variant="subtitle1" gutterBottom>
-        Usuario: {userEmail}
-      </Typography>
+     
       
       
       
