@@ -1,6 +1,8 @@
 // src/components/layouts/DashboardLayout.js
 import React from 'react';
-import { Box, CssBaseline, AppBar, Toolbar, Typography, Drawer } from '@mui/material';
+import { AppBar, Box, CssBaseline, Drawer, IconButton, Toolbar, Typography, Button } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useMsal } from '@azure/msal-react';
 import { styled } from '@mui/material/styles';
 
 const drawerWidth = 240;
@@ -16,15 +18,33 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const DashboardLayout = ({ children }) => {
+  const { instance, accounts } = useMsal();
+  const userEmail = accounts[0]?.username;
+
+  const handleLogout = () => {
+    instance.logoutRedirect();
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <IconButton color="inherit" edge="start" sx={{ mr: 2 }}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Ticket Dashboard
           </Typography>
+          {userEmail && (
+            <>
+              <Typography variant="body1" sx={{ mr: 2 }}>
+                {userEmail}
+              </Typography>
+              <Button color="inherit" onClick={handleLogout}>Logout</Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -40,7 +60,7 @@ const DashboardLayout = ({ children }) => {
         }}
       >
         <Toolbar />
-        {/* Aquí podrías añadir navegación */}
+        {/* Agrega aquí links si usas navegación */}
       </Drawer>
 
       <Main>

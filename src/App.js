@@ -1,38 +1,33 @@
-import React from "react";
-import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "./utils/azureAuthUtil";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Dashboard from "./components/dashBoard";
+// src/App.js
+import React from 'react';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalProvider } from '@azure/msal-react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DashboardLayout from './components/dashboardLayout';
+import DashboardPage from './components/dashboardPage';
 
-export default function App() {
-  const { instance, accounts } = useMsal();
+const msalConfig = {
+  auth: {
+    clientId: 'TU_CLIENT_ID',
+    authority: 'https://login.microsoftonline.com/TU_TENANT_ID',
+    redirectUri: '/',
+  },
+};
 
-  const handleLogin = () => {
-    instance.loginPopup(loginRequest).catch(e => {
-      console.error("Login error:", e);
-    });
-  };
+const pca = new PublicClientApplication(msalConfig);
 
-  const handleLogout = () => {
-    instance.logoutPopup();
-  };
-
+function App() {
   return (
-    <div>
-      {accounts.length > 0 ? (
-        <Stack spacing={2} direction="row">
-          <h1>Bienvenido, {accounts[0].name}</h1>
-          <Button onClick={handleLogout} variant="outlined">Sign Out</Button>
-          
-        </Stack>
-      ) : (
-        <div>
-        <Button onClick={handleLogin} variant="outlined">Sign In</Button>
-        <Dashboard />
-        </div>
-      )}
-    </div>
+    <MsalProvider instance={pca}>
+      <Router>
+        <DashboardLayout>
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+          </Routes>
+        </DashboardLayout>
+      </Router>
+    </MsalProvider>
   );
 }
 
+export default App;
