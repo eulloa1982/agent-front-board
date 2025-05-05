@@ -1,8 +1,0 @@
-{
-    "databaseConnections": {
-      "default": {
-        "connectionId": "Production",
-        "provider": "mssql"
-      }
-    }
-  }
