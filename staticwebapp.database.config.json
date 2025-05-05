@@ -1,7 +1,7 @@
 {
     "databaseConnections": {
       "default": {
-        "connectionId": "default",
+        "connectionId": "Production",
         "provider": "mssql"
       }
     }
