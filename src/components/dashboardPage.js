@@ -29,7 +29,7 @@ const DashboardPage = () => {
               <Card  sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    Totals by Agent (in the week)
+                    Tickets by Agent
                   </Typography>
                   <TicketsByDayBarChart />
                 </CardContent>
@@ -44,7 +44,7 @@ const DashboardPage = () => {
             <Card sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Tickets por agente
+                  Tickets by Category
                 </Typography>
                 <TicketsByAgentBarChart />
               </CardContent>
@@ -56,7 +56,7 @@ const DashboardPage = () => {
             <Card sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Tickets por día
+                  Tickets by Status
                 </Typography>
                 <StatusPieChart />
               </CardContent>
