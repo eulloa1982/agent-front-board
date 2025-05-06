@@ -17,7 +17,7 @@ const DashboardPage = () => {
               <Card  sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    Tickets por estado
+                    Tickets by source
                   </Typography>
                   <CategoryPieChart />
                 </CardContent>
