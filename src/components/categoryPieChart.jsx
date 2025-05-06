@@ -42,7 +42,7 @@ const CategoryPieChart = () => {
           data={tickets}
           dataKey="tickets_this_week"
           nameKey="ticket_source"
-          outerRadius={100}
+          outerRadius={140}
           label
         >
           {tickets.map((entry, index) => (
