@@ -14,7 +14,7 @@ const DashboardPage = () => {
           {/* First Row */}
             {/* Pie Chart 1 */}
             <Grid>
-              <Card  sx={{ width: 500, boxShadow: 6, borderRadius: 4, p: 2, m:1 }}>
+              <Card  sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
                     Tickets por estado
@@ -26,10 +26,10 @@ const DashboardPage = () => {
 
             {/* Pie Chart 2 */}
             <Grid>
-              <Card  sx={{ width: 500, boxShadow: 6, borderRadius: 4, p: 2, m:1 }}>
+              <Card  sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    Tickets por prioridad
+                    Totals by Agent (in the week)
                   </Typography>
                   <TicketsByDayBarChart />
                 </CardContent>
@@ -41,7 +41,7 @@ const DashboardPage = () => {
       <Box sx={{ flex: 2, p: 2 }}>
           {/* Bar Chart 1 */}
           <Grid item xs={12}>
-            <Card sx={{ width: 500, boxShadow: 6, borderRadius: 4, p: 2, m:1 }}>
+            <Card sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Tickets por agente
@@ -53,7 +53,7 @@ const DashboardPage = () => {
 
           {/* Bar Chart 2 */}
           <Grid item xs={12}>
-            <Card sx={{ width: 500, boxShadow: 6, borderRadius: 4, p: 2, m:1 }}>
+            <Card sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Tickets por día

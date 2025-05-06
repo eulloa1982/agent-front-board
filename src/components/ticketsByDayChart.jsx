@@ -20,7 +20,7 @@ const TicketsByDayBarChart = () => {
           })
           .then(data => {
             setTickets(data['ResultSets']['Table1'] || []);
-            console.log(data['ResultSets']['Table1'])
+            //console.log(data['ResultSets']['Table1'])
             //setLoadingTickets(false);
           })
           .catch(err => {
