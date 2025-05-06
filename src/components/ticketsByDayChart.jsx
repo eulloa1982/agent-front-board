@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { day: 'Lunes', tickets: 5 },
-  { day: 'Martes', tickets: 8 },
-  { day: 'Miércoles', tickets: 6 },
-  { day: 'Jueves', tickets: 10 },
-  { day: 'Viernes', tickets: 4 },
-];
-
 const TicketsByDayBarChart = () => {
   const [tickets, setTickets] = useState([]);
   const user = true;
