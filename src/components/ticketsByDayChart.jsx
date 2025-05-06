@@ -20,7 +20,7 @@ const TicketsByDayBarChart = () => {
           })
           .then(data => {
             setTickets(data['ResultSets']['Table1'] || []);
-            console.log(data)
+            console.log(data['ResultSets']['Table1'])
             //setLoadingTickets(false);
           })
           .catch(err => {
@@ -38,10 +38,10 @@ const TicketsByDayBarChart = () => {
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={tickets} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="day" />
+        <XAxis dataKey="name" />
         <YAxis allowDecimals={false} />
         <Tooltip />
-        <Bar dataKey="tickets" fill="#00bcd4" />
+        <Bar dataKey="tickets_this_week" fill="#00bcd4" />
       </BarChart>
     </ResponsiveContainer>
   );
