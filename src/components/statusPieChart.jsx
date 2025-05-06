@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-/*const data = [
-  { name: 'Abiertos', value: 10 },
-  { name: 'En Proceso', value: 5 },
-  { name: 'Cerrados', value: 15 },
-  { name: 'Reabiertos', value: 3 },
-];*/
-
 const COLORS = ['#4caf50', '#ff9800', '#9e9e9e', '#2196f3'];
 
 const StatusPieChart = () => {
@@ -45,13 +38,13 @@ const StatusPieChart = () => {
 
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={400}>
       <PieChart>
         <Pie
           data={tickets}
           dataKey="status_this_week"
           nameKey="status"
-          outerRadius={90}
+          outerRadius={140}
           label
         >
           {tickets.map((entry, index) => (
