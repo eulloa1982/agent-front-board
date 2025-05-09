@@ -14,7 +14,7 @@ const DashboardPage = () => {
       <Box sx={{ display: 'flex' }}>
         <Box sx={{p:2}}>
           <Grid>
-            <Card  sx={{ width: 1200, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
+            <Card  sx={{ width: 1300, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Tickets by hour
