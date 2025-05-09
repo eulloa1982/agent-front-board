@@ -10,18 +10,23 @@ import TicketsCountByHour from './ticketsCOuntByHour';
 const DashboardPage = () => {
  
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Box sx={{p:2}}>
-        <Card  sx={{ width: 1200, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Tickets by hour
-            </Typography>
-                  <TicketsCountByHour />
-          </CardContent>
-        </Card>
+    <>
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{p:2}}>
+          <Grid>
+            <Card  sx={{ width: 1200, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Tickets by hour
+                </Typography>
+                      <TicketsCountByHour />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Box>
       </Box>
-      <Box sx={{ flex: 2, p: 2 }}>
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{ flex: 2, p: 2 }}>
           {/* First Row */}
             {/* Pie Chart 1 */}
             <Grid>
@@ -83,6 +88,7 @@ const DashboardPage = () => {
       {/* Aquí agregas tus gráficas y tablas */}
 
     </Box>
+    </>
   );
 };
 
