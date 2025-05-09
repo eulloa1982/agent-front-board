@@ -41,11 +41,11 @@ const TicketsCountByHour = () => {
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={tickets} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="hour_of_day" />
         <YAxis allowDecimals={false} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="tickets_this_week" fill="#3f51b5" />
+        <Bar dataKey="ticket_count" fill="#3f51b5" />
       </BarChart>
     </ResponsiveContainer>
   );
