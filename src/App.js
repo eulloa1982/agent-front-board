@@ -7,6 +7,14 @@ import DashboardPage from './components/dashboardPage';
 import MsalProviderWrapper from './utils/msalProviderWrapper';
 import SideMenu from './components/sideMenu';
 import AgentsPage from './components/agentsPage';
+//import RequireAuth from './utils/requireAuth';
+/*<Route element={<RequireAuth />}>
+              {/* Al acceder a “/”, redirige a /dashboard *
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/agents"    element={<AgentsPage />} />
+              {/* Otras rutas protegidas aquí *
+            </Route>*/
 
 // Componente para gestionar la autenticación
 const AuthComponent = ({ setAuthenticated }) => {
