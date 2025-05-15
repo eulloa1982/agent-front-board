@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Card, CardHeader, CardContent, Avatar, Typography, IconButton, CardActions, Button, Box } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, Avatar, Typography, IconButton, Box } from '@mui/material';
 import { Email as EmailIcon, Phone as PhoneIcon, LinkedIn as LinkedInIcon, Twitter as TwitterIcon, Facebook as FacebookIcon } from '@mui/icons-material';
 
 // Ejemplo de datos de agentes
