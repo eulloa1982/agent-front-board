@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from 'react';
+import { ResponsiveContainer,Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 
 
 const TicketsByAgentBarChart = () => {
@@ -39,14 +39,12 @@ const TicketsByAgentBarChart = () => {
 
   return (
     <ResponsiveContainer >
-      <BarChart data={tickets} width="100%" height="100%">
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="tickets_this_week" fill="#3f51b5" />
-      </BarChart>
+      <RadarChart cx="50%" cy="50%" outerRadius="90%" innerRadius="10%" data={tickets}>
+          <PolarGrid />
+          <PolarAngleAxis dataKey="name" tick={{ fontSize: 10 }}/>
+          <PolarRadiusAxis />
+          <Radar name="Mike" dataKey="tickets_this_week" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+        </RadarChart>
     </ResponsiveContainer>
   );
 };

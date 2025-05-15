@@ -4,9 +4,8 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
   IconButton,
-  Tooltip
+  Tooltip,Typography
 } from '@mui/material';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -17,7 +16,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const miniWidth = 60;
-const expandedWidth = 240;
+const expandedWidth = 490;
 
 const menuItems = [
   { icon: <DashboardIcon />, text: 'Dashboard' },
@@ -77,7 +76,7 @@ const SideMenu = () => {
             {menuItems.map((item, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+                <Typography variant="caption" gutterBottom sx={{m:0}}>{item.text} </Typography>
               </ListItem>
             ))}
           </List>

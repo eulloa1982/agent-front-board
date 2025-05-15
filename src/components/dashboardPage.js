@@ -11,17 +11,17 @@ const DashboardCard = ({ title, children }) => (
     sx={{
       backgroundColor: '#ffffff',
       boxShadow: 'none',
-      borderRadius: 2,
-      height: '100%',
+      borderRadius: 1,
+      height: '100%'
     }}
   >
     <CardContent sx={{ height: 300 }}>
       <Typography variant="subtitle1"
-  fontFamily="Inter, Roboto, sans-serif"
-  fontWeight={500}
-  fontSize={14}
-  color="text.secondary">
-        {title}
+        fontFamily="Inter, Roboto, sans-serif"
+        fontWeight={500}
+        fontSize={14}
+        color="text.secondary">
+          {title}
       </Typography>
        <Box sx={{ height: '100%' }}>{children}</Box>
     </CardContent>
@@ -32,6 +32,11 @@ const DashboardPage = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
+        <Grid size={8} height='50%'>
+          <DashboardCard title="Tickets by Status">
+            <StatusPieChart />
+          </DashboardCard>
+        </Grid>
         {/* Primera fila: 3 tarjetas */}
         <Grid size={4}>
           <DashboardCard title="Tickets by Hour">
@@ -58,11 +63,7 @@ const DashboardPage = () => {
           </DashboardCard>
         </Grid>
 
-        <Grid size={4}>
-          <DashboardCard title="Tickets by Status">
-            <StatusPieChart />
-          </DashboardCard>
-        </Grid>
+        
       </Grid>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer,LabelList } from 'recharts';
 
 const TicketsByDayBarChart = () => {
   const [tickets, setTickets] = useState([]);
@@ -31,17 +31,38 @@ const TicketsByDayBarChart = () => {
       }
     }, [user]);
 
+  const renderCustomizedLabel = (props) => {
+    const { x, y, width, value } = props;
+    const radius = 15;
 
+    return (
+      <g>
+        <circle cx={x + width / 2} cy={y - radius} r={radius} fill="#8884d8" />
+        <text x={x + width / 2} y={y - radius} fill="#fff" textAnchor="middle" dominantBaseline="middle" fontSize={10}>
+          {value.split(' ').map(p => p[0].toUpperCase()).join('')}
+        </text>
+      </g>
+    );
+  };
 
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={tickets} >
-        <CartesianGrid strokeDasharray="5 5" />
-        <XAxis dataKey="name" />
-        <YAxis allowDecimals={false} />
+      <BarChart data={tickets} 
+          height={300}
+            margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" tick={ false }/>
+        <YAxis allowDecimals={false} tick={ false } />
         <Tooltip />
-        <Bar dataKey="tickets_this_week" fill="#00bcd4" />
+        <Bar dataKey="tickets_this_week" fill="#00bcd4" maxPointSize={5}>
+          <LabelList dataKey="name" content={renderCustomizedLabel} />
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );

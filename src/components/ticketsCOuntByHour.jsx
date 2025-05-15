@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
-  CartesianGrid,
-  ResponsiveContainer,
-  LineChart,Line,AreaChart,Area
+  ResponsiveContainer,AreaChart,Area
 } from 'recharts';
 
 const TicketsCountByHour = () => {
@@ -47,20 +42,20 @@ const TicketsCountByHour = () => {
         }}
       >
         <XAxis dataKey="hour_of_day" tick={{ fontSize: 10 }}/>
-        <YAxis  dataKey="ticket_count" tick={ false }/>
+        <YAxis  dataKey="ticket_count" tick={ false } activeDot={{ r: 8 }}/>
         <Tooltip
-  content={({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div style={{
-          background: "#fff",
-          border: "1px solid #ccc",
-          borderRadius: 6,
-          padding: "8px 12px",
-          fontFamily: "Inter, Roboto, sans-serif",
-          fontSize: 13,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        }}>
+          content={({ active, payload, label }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div style={{
+                  background: "#fff",
+                  border: "1px solid #ccc",
+                  borderRadius: 6,
+                  padding: "8px 12px",
+                  fontFamily: "Inter, Roboto, sans-serif",
+                  fontSize: 13,
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          }}>
           <div><strong>Hora:</strong> {label}:00</div>
           <div><strong>Tickets:</strong> {payload[0].value}</div>
         </div>
@@ -70,25 +65,10 @@ const TicketsCountByHour = () => {
   }}
 />
 
-        <Area type="monotone" dataKey="ticket_count" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="ticket_count" stroke="#8884d8" fill="#8884d8" strokeWidth={2}/>
       </AreaChart>
     </ResponsiveContainer>
   );
 };
 
 export default TicketsCountByHour;
-
-/*
-<ResponsiveContainer width="100%" height="100%">
-      <LineChart data={tickets} >
-        
-        <XAxis dataKey="hour_of_day" />
-        <YAxis dataKey="ticket_count"/>
-        <Tooltip />
-        <Legend />
-        
-        <Line type="monotone" dataKey="ticket_count" stroke="#00A1FF" fill="#8884d8" />
-      </LineChart>
-    </ResponsiveContainer>
-
-*/

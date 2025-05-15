@@ -3,8 +3,9 @@ import { CssBaseline, CircularProgress, Button, Box } from '@mui/material';
 import { useMsal } from '@azure/msal-react';
 import DashboardLayout from './components/dashboardLayout';
 import DashboardPage from './components/dashboardPage';
-import MsalProviderWrapper from './utils/msalProviderWrapper'; // Importar el wrapper
+import MsalProviderWrapper from './utils/msalProviderWrapper';
 import SideMenu from './components/sideMenu';
+
 // Componente para gestionar la autenticación
 const AuthComponent = ({ setAuthenticated }) => {
   const { instance, accounts } = useMsal();
@@ -12,32 +13,24 @@ const AuthComponent = ({ setAuthenticated }) => {
 
   useEffect(() => {
     if (accounts.length > 0) {
-      setAuthenticated(true);  // Usuario autenticado
-      setLoading(false);
-    } else {
-      setLoading(false);
+      setAuthenticated(true);
     }
+    setLoading(false);
   }, [accounts, setAuthenticated]);
 
   const handleLogin = () => {
-    instance.loginPopup().then((response) => {
-      setAuthenticated(true);
-    }).catch((error) => {
-      console.error(error);
-    });
+    instance.loginPopup()
+      .then(() => setAuthenticated(true))
+      .catch(error => console.error(error));
   };
 
   const handleLogout = () => {
-    instance.logoutPopup().then(() => {
-      setAuthenticated(false);
-    }).catch((error) => {
-      console.error(error);
-    });
+    instance.logoutPopup()
+      .then(() => setAuthenticated(false))
+      .catch(error => console.error(error));
   };
 
-  if (loading) {
-    return <CircularProgress />;
-  }
+  if (loading) return <CircularProgress />;
 
   return (
     <>
@@ -55,21 +48,29 @@ const AuthComponent = ({ setAuthenticated }) => {
 };
 
 const App = () => {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <SideMenu />
+  const [authenticated, setAuthenticated] = useState(false);
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DashboardLayout>
-        <DashboardPage />
-        </DashboardLayout>
+  return (
+    <MsalProviderWrapper>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <SideMenu />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DashboardLayout>
+            {!authenticated ? (
+              <AuthComponent setAuthenticated={setAuthenticated} />
+            ) : (
+              <DashboardPage />
+            )}
+          </DashboardLayout>
+        </Box>
       </Box>
-    </Box>
+    </MsalProviderWrapper>
   );
 };
 
 export default App;
+
 
 /*
 

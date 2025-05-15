@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658'];
+const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#00A1FF','#00CEB6'];
 
 const CategoryPieChart = () => {
   const [tickets, setTickets] = useState([]);
@@ -37,12 +37,22 @@ const CategoryPieChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <PieChart>
+      <PieChart margin={{
+          top: 80,
+          right: 10,
+          left: 0,
+          bottom: 0,
+        }}>
         <Pie
           data={tickets}
           dataKey="tickets_this_week"
           nameKey="ticket_source"
+          startAngle={180}
+          endAngle={0}
+          cx="50%"
+          cy="50%"
           outerRadius={140}
+          paddingAngle={5}
           label
         >
           {tickets.map((entry, index) => (
@@ -50,7 +60,7 @@ const CategoryPieChart = () => {
           ))}
         </Pie>
         <Tooltip />
-        <Legend />
+        <Legend layout='vertical' align='right' verticalAlign='top' iconSize={10} iconType='circle'/>
       </PieChart>
     </ResponsiveContainer>
   );
