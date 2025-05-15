@@ -1,6 +1,6 @@
 
 // src/MsalProviderWrapper.jsx
-/*import React from "react";
+import React from "react";
 import { PublicClientApplication, InteractionType } from "@azure/msal-browser";
 import { MsalProvider, MsalAuthenticationTemplate } from "@azure/msal-react";
 import { msalConfig, loginRequest } from "./azureAuthUtil";
@@ -20,9 +20,9 @@ export default function MsalProviderWrapper({ children }) {
       </MsalAuthenticationTemplate>
     </MsalProvider>
   );
-}*/
+}
 // src/MsalProviderWrapper.jsx
-import React from "react";
+/*import React from "react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 import RequireAuth from "./requireAuth";
@@ -38,4 +38,4 @@ export default function MsalProviderWrapper({ children }) {
       </RequireAuth>
     </MsalProvider>
   );
-}
+}*/
