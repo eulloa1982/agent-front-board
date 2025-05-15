@@ -12,6 +12,7 @@ export default function RequireAuth({ children }) {
   );
 
   if (error) {
+    console.log(login)
     return <Typography color="error">Error autenticando: {error.message}</Typography>;
   }
 
