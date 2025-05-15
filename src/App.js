@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, CircularProgress, Button, Box } from '@mui/material';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import DashboardLayout from './components/dashboardLayout';
 import DashboardPage from './components/dashboardPage';
 import MsalProviderWrapper from './utils/msalProviderWrapper';
 import SideMenu from './components/sideMenu';
+import AgentsPage from './components/agentsPage';
 
 // Componente para gestionar la autenticación
 const AuthComponent = ({ setAuthenticated }) => {
@@ -52,6 +54,42 @@ const App = () => {
 
   return (
     <MsalProviderWrapper>
+       <BrowserRouter>
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <SideMenu />
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <DashboardLayout>
+               {!authenticated ? (
+                <AuthComponent setAuthenticated={setAuthenticated} />
+               ) : (
+                <Routes>
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/agents" element={<AgentsPage />} />
+                    
+                    {/* fallback */}
+                    <Route path="*" element={<Navigate to="/dashboard" replace />} />
+                  </Routes>
+               )}
+              
+            </DashboardLayout>
+          </Box>
+        </Box>
+      </BrowserRouter>
+    </MsalProviderWrapper>
+  );
+};
+
+export default App;
+
+
+/*
+const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  return (
+    <MsalProviderWrapper>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <SideMenu />
@@ -68,43 +106,4 @@ const App = () => {
     </MsalProviderWrapper>
   );
 };
-
-export default App;
-
-
-/*
-
-const App = () => {
-  const [authenticated, setAuthenticated] = useState(false);
-
-  return (
-   
-    <MsalProviderWrapper>
-      <Box sx={{ display: 'flex' }}>
-        <SideMenu />
-        <CssBaseline />
-        <DashboardLayout>
-          <DashboardPage />
-          
-        </DashboardLayout>
-      </Box>
-       </MsalProviderWrapper>
-    
-  );
-};
- {/*<MsalProviderWrapper>
-
-
-
-      <CssBaseline />
-      <DashboardLayout>
-       
-        {!authenticated ? (
-          <AuthComponent setAuthenticated={setAuthenticated} />
-        ) : (
-          // Mostrar el Dashboard solo si el usuario está autenticado
-          <DashboardPage />
-        )}
-      </DashboardLayout>
-      </MsalProviderWrapper>
 */

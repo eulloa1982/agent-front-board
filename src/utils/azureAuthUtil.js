@@ -12,5 +12,5 @@ export const msalConfig = {
   };
   
   export const loginRequest = {
-    scopes: ["User.Read"], // puedes agregar más scopes según tu app
+    scopes: ["User.Read", "User.ReadBasic.All"], // puedes agregar más scopes según tu app
   };
