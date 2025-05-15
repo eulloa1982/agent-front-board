@@ -38,13 +38,13 @@ const StatusPieChart = () => {
 
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height="80%">
       <PieChart>
         <Pie
           data={tickets}
           dataKey="status_this_week"
           nameKey="status"
-          outerRadius={140}
+          outerRadius={80}
           label
         >
           {tickets.map((entry, index) => (

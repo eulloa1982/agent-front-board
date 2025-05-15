@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { CssBaseline, CircularProgress, Button } from '@mui/material';
+import { CssBaseline, CircularProgress, Button, Box } from '@mui/material';
 import { useMsal } from '@azure/msal-react';
 import DashboardLayout from './components/dashboardLayout';
 import DashboardPage from './components/dashboardPage';
 import MsalProviderWrapper from './utils/msalProviderWrapper'; // Importar el wrapper
-
+import SideMenu from './components/sideMenu';
 // Componente para gestionar la autenticación
 const AuthComponent = ({ setAuthenticated }) => {
   const { instance, accounts } = useMsal();
@@ -55,13 +55,49 @@ const AuthComponent = ({ setAuthenticated }) => {
 };
 
 const App = () => {
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <SideMenu />
+
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DashboardLayout>
+        <DashboardPage />
+        </DashboardLayout>
+      </Box>
+    </Box>
+  );
+};
+
+export default App;
+
+/*
+
+const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
 
   return (
+   
     <MsalProviderWrapper>
+      <Box sx={{ display: 'flex' }}>
+        <SideMenu />
+        <CssBaseline />
+        <DashboardLayout>
+          <DashboardPage />
+          
+        </DashboardLayout>
+      </Box>
+       </MsalProviderWrapper>
+    
+  );
+};
+ {/*<MsalProviderWrapper>
+
+
+
       <CssBaseline />
       <DashboardLayout>
-        {/* Mostrar el login si no está autenticado */}
+       
         {!authenticated ? (
           <AuthComponent setAuthenticated={setAuthenticated} />
         ) : (
@@ -69,8 +105,5 @@ const App = () => {
           <DashboardPage />
         )}
       </DashboardLayout>
-    </MsalProviderWrapper>
-  );
-};
-
-export default App;
+      </MsalProviderWrapper>
+*/

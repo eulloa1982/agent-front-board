@@ -1,94 +1,70 @@
-// src/pages/DashboardPage.js
-import React from 'react';
-import { Box, Grid, Card, CardContent, Typography } from '@mui/material';
-import TicketsByDayBarChart from './ticketsByDayChart';
+import { Grid, Card, CardContent, Typography, Box } from '@mui/material';
 import TicketsByAgentBarChart from './ticketsByAgentChart';
+import TicketsByDayBarChart from './ticketsByDayChart';
 import CategoryPieChart from './categoryPieChart';
 import StatusPieChart from './statusPieChart';
 import TicketsCountByHour from './ticketsCOuntByHour';
 
+const DashboardCard = ({ title, children }) => (
+  <Card
+    variant="outlined"
+    sx={{
+      backgroundColor: '#ffffff',
+      boxShadow: 'none',
+      borderRadius: 2,
+      height: '100%',
+    }}
+  >
+    <CardContent sx={{ height: 300 }}>
+      <Typography variant="subtitle1"
+  fontFamily="Inter, Roboto, sans-serif"
+  fontWeight={500}
+  fontSize={14}
+  color="text.secondary">
+        {title}
+      </Typography>
+       <Box sx={{ height: '100%' }}>{children}</Box>
+    </CardContent>
+  </Card>
+);
+
 const DashboardPage = () => {
- 
   return (
-    <>
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{p:2}}>
-          <Grid>
-            <Card  sx={{ width: 1300, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Tickets by hour
-                </Typography>
-                      <TicketsCountByHour />
-              </CardContent>
-            </Card>
-          </Grid>
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{ flex: 2, p: 2 }}>
-          {/* First Row */}
-            {/* Pie Chart 1 */}
-            <Grid>
-              <Card  sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Tickets by source
-                  </Typography>
-                  <CategoryPieChart />
-                </CardContent>
-              </Card>
-            </Grid>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        {/* Primera fila: 3 tarjetas */}
+        <Grid size={4}>
+          <DashboardCard title="Tickets by Hour">
+            <TicketsCountByHour />
+          </DashboardCard>
+        </Grid>
 
-            {/* Pie Chart 2 */}
-            <Grid>
-              <Card  sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Tickets by Agent
-                  </Typography>
-                  <TicketsByDayBarChart />
-                </CardContent>
-              </Card>
-            </Grid>
-      </Box>
+        <Grid size={4}>
+          <DashboardCard title="Tickets by Source">
+            <CategoryPieChart />
+          </DashboardCard>
+        </Grid>
 
-      {/* Second Row */}
-      <Box sx={{ flex: 2, p: 2 }}>
-          {/* Bar Chart 1 */}
-          <Grid item xs={12}>
-            <Card sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Tickets by Category
-                </Typography>
-                <TicketsByAgentBarChart />
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid size={4 }>
+          <DashboardCard title="Tickets by Agent">
+            <TicketsByDayBarChart />
+          </DashboardCard>
+        </Grid>
 
-          {/* Bar Chart 2 */}
-          <Grid item xs={12}>
-            <Card sx={{ width: 600, boxShadow: 6, borderRadius: 4, p: 1, m:0.5 }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Tickets by Status
-                </Typography>
-                <StatusPieChart />
-              </CardContent>
-            </Card>
-          </Grid>
-      </Box>
-    
-     
-      
-      
-      
-      
-      {/* Aquí agregas tus gráficas y tablas */}
+        {/* Segunda fila: 2 tarjetas */}
+        <Grid size={4}>
+          <DashboardCard title="Tickets by Category">
+            <TicketsByAgentBarChart />
+          </DashboardCard>
+        </Grid>
 
+        <Grid size={4}>
+          <DashboardCard title="Tickets by Status">
+            <StatusPieChart />
+          </DashboardCard>
+        </Grid>
+      </Grid>
     </Box>
-    </>
   );
 };
 

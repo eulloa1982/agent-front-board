@@ -35,9 +35,9 @@ const TicketsByDayBarChart = () => {
 
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <BarChart data={tickets} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" />
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart data={tickets} >
+        <CartesianGrid strokeDasharray="5 5" />
         <XAxis dataKey="name" />
         <YAxis allowDecimals={false} />
         <Tooltip />

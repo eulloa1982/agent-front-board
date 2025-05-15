@@ -38,11 +38,11 @@ const TicketsByAgentBarChart = () => {
 
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <BarChart data={tickets} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
+    <ResponsiveContainer >
+      <BarChart data={tickets} width="100%" height="100%">
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis allowDecimals={false} />
+        <YAxis />
         <Tooltip />
         <Legend />
         <Bar dataKey="tickets_this_week" fill="#3f51b5" />
