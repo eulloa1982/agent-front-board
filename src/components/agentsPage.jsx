@@ -146,6 +146,7 @@ export default function AgentsPage() {
           };
         });
         setProfiles(initialProfiles);
+        console.log(agents)
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
@@ -178,7 +179,6 @@ export default function AgentsPage() {
         if (res) updated[res.idx].photoUrl = res.url;
       });
       setProfiles(updated);
-      console.log(updated);
     });
   }, [token, profiles]);
 
