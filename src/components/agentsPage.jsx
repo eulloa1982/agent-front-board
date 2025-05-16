@@ -164,7 +164,7 @@ export default function AgentsPage() {
   return (
     <Grid container spacing={3}>
       {profiles.map(agent => (
-        <Grid item xs={12} sm={6} md={4} key={agent.id}>
+        <Grid size={4} item xs={12} sm={6} md={4} key={agent.id}>
           <Card sx={{ display:'flex', flexDirection:'column', height:'100%' }}>
             <CardHeader
               avatar={<Avatar src={agent.photoUrl||agent.avatarUrl} sx={{width:56,height:56}}/>}
@@ -172,19 +172,16 @@ export default function AgentsPage() {
               subheader={<Typography color="text.secondary">{agent.role}</Typography>}
             />
             <CardContent sx={{flexGrow:1}}>
-              <Typography variant="body2" color="text.secondary">Información de contacto:</Typography>
+              <Typography variant="body2" color="text.secondary">Data contact:</Typography>
               <Typography sx={{display:'flex',alignItems:'center',mt:1}}>
                 <EmailIcon fontSize="small" sx={{mr:1}}/>{agent.email}
               </Typography>
               <Typography sx={{display:'flex',alignItems:'center',mt:0.5}}>
                 <PhoneIcon fontSize="small" sx={{mr:1}}/>{agent.phone}
               </Typography>
-              <Typography variant="body2" sx={{mt:1}}><strong>Ubicación:</strong> {agent.officeLocation}</Typography>
-              <Typography variant="body2"><strong>Departamento:</strong> {agent.department}</Typography>
-              <Typography variant="body2"><strong>Idioma:</strong> {agent.preferredLanguage}</Typography>
-              <Typography variant="body2"><strong>ID Empleado:</strong> {agent.employeeId}</Typography>
-              <Typography variant="body2"><strong>Manager:</strong> {agent.manager}</Typography>
-              <Typography variant="body2"><strong>Categorías:</strong> {agent.categories.join(', ')}</Typography>
+              <Typography variant="body2" sx={{mt:1}}><strong>Location:</strong> {agent.officeLocation}</Typography>
+              <Typography variant="body2"><strong>Department:</strong> {agent.department}</Typography>
+              <Typography variant="body2"><strong>Tickets categories:</strong> {agent.categories.join(', ')}</Typography>
             </CardContent>
             <Box sx={{bgcolor:'#f5f5f5',p:1,display:'flex',justifyContent:'center'}}>
               {agent.socials.linkedin&&<IconButton component="a" href={agent.socials.linkedin} target="_blank"><LinkedInIcon/></IconButton>}
