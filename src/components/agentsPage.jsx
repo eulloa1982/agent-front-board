@@ -24,13 +24,14 @@ const LOGIC_APP_URL =
   'https://prod-93.eastus.logic.azure.com:443/workflows/ff86d55fd06247718eb18d676e4e14a7/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=MLRAda9VPX1_7F81diahvx-VzTeI4minZWXOADT-Tlg';
 const GRAPH_BATCH_ENDPOINT = 'https://graph.microsoft.com/v1.0/$batch';
 
-// Divide array en chunks de tamaño dado\ nfunction chunkArray(arr, size) {
+// Divide array en chunks de tamaño dado
+function chunkArray(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
     chunks.push(arr.slice(i, i + size));
   }
   return chunks;
-
+}
 
 export default function AgentsPage() {
   const token = useGraphToken();
@@ -183,7 +184,7 @@ export default function AgentsPage() {
     return (
       <Box sx={{ textAlign: 'center', mt: 4 }}>
         <CircularProgress />
-        <Typography>Loading agents…</Typography>
+        <Typography>Cargando agentes…</Typography>
       </Box>
     );
   }
@@ -209,25 +210,25 @@ export default function AgentsPage() {
             />
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography variant="body2" color="text.secondary">
-                Contact:
+                Información de contacto:
               </Typography>
               <Typography component="div" sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
                 <EmailIcon fontSize="small" sx={{ mr: 1 }} />{agent.email}
               </Typography>
               <Typography component="div" sx={{ display: 'flex', alignItems: 'center', mt: 0.5 }}>
-                <PhoneIcon fontSize="small" sx={{ mr: 1 }} />{agent.businessPhones}
+                <PhoneIcon fontSize="small" sx={{ mr: 1 }} />{agent.phone}
               </Typography>
               <Typography variant="body2" sx={{ mt: 1 }}>
-                <strong>Location:</strong> {agent.officeLocation}
+                <strong>Ubicación:</strong> {agent.officeLocation}
               </Typography>
               <Typography variant="body2">
-                <strong>Department:</strong> {agent.department}
+                <strong>Departamento:</strong> {agent.department}
               </Typography>
               <Typography variant="body2">
-                <strong>Language:</strong> {agent.preferredLanguage}
+                <strong>Idioma:</strong> {agent.preferredLanguage}
               </Typography>
               <Typography variant="body2">
-                <strong>Employee ID:</strong> {agent.employeeId}
+                <strong>ID Empleado:</strong> {agent.employeeId}
               </Typography>
               <Typography variant="body2">
                 <strong>Manager:</strong> {agent.manager}
