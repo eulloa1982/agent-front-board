@@ -178,6 +178,7 @@ export default function AgentsPage() {
         if (res) updated[res.idx].photoUrl = res.url;
       });
       setProfiles(updated);
+      console.log(updated);
     });
   }, [token, profiles]);
 
@@ -185,7 +186,7 @@ export default function AgentsPage() {
     return (
       <Box sx={{ textAlign: 'center', mt: 4 }}>
         <CircularProgress />
-        <Typography>Cargando agentes…</Typography>
+        <Typography>Loading agents</Typography>
       </Box>
     );
   }
@@ -194,10 +195,11 @@ export default function AgentsPage() {
   }
 
   // 4. Renderizar cards con foto si está disponible
+  
   return (
     <Grid container spacing={3}>
       {profiles.map(agent => (
-        <Grid item xs={12} sm={6} md={4} key={agent.id}>
+        <Grid item size={4} xs={12} sm={6} md={4} key={agent.id}>
           <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <CardHeader
               avatar={
