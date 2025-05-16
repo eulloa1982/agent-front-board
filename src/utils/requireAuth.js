@@ -13,7 +13,7 @@ export default function RequireAuth({ children }) {
 
   if (error) {
     console.log(login)
-    return <Typography color="error">Error autenticando: {error.message}</Typography>;
+    return <Typography color="error">There is an error on the authenticated flow: {error.message}</Typography>;
   }
 
   if (!result) {
@@ -21,7 +21,7 @@ export default function RequireAuth({ children }) {
     return (
       <Box sx={{ textAlign: "center", mt: 4 }}>
         <CircularProgress />
-        <Typography>Cargando autenticación…</Typography>
+        <Typography>Loading authentication …</Typography>
       </Box>
     );
   }
