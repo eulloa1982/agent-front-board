@@ -1,4 +1,3 @@
-// src/components/AgentsPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useGraphToken } from '../utils/useGraphToken';
 import {
@@ -13,23 +12,20 @@ import {
   Facebook as FacebookIcon
 } from '@mui/icons-material';
 
-const GRAPH_BATCH_ENDPOINT = 'https://graph.microsoft.com/v1.0/$batch';
-// Reemplaza con tu URL de Logic App
+// URL de tu Logic App
 const LOGIC_APP_URL = 'https://prod-93.eastus.logic.azure.com:443/workflows/ff86d55fd06247718eb18d676e4e14a7/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=MLRAda9VPX1_7F81diahvx-VzTeI4minZWXOADT-Tlg';
 
 export default function AgentsPage() {
-  const token = useGraphToken();              // 1. Hook que te da el accessToken o null
+  const token = useGraphToken();              // Hook que devuelve el token o null
   const [agents, setAgents] = useState([]);   // agentes mínimos desde SQL
   const [profiles, setProfiles] = useState([]);// perfiles enriquecidos
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState(null);
 
-  // 2. Traer agentes desde Logic App
+  // 1. Traer agentes desde Logic App
   useEffect(() => {
     fetch(LOGIC_APP_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({})                 // ajusta payload si tu Logic App lo necesita
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({})
     })
       .then(res => {
         if (!res.ok) throw new Error('Error cargando agentes de SQL');
@@ -37,54 +33,40 @@ export default function AgentsPage() {
       })
       .then(data => {
         const list = data.ResultSets?.Table1 || data.agents || [];
-        setAgents(list.map(a => ({
-          id:     a.agent_id,
-          name:   a.name,
-          email:  a.email,
-          socials: a.socials || {}
-        })));
+        setAgents(list.map(a => ({ id: a.agent_id, name: a.name, email: a.email, socials: a.socials || {} })));
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
-  // 3. Cuando tengamos token y lista de agentes, disparar batch Graph
+  // 2. Cuando tengamos token y lista de agentes, llamar a Graph con filtro
   useEffect(() => {
     if (!token || agents.length === 0) return;
     setLoading(true);
 
-    const batchRequests = agents.map((ag, i) => ({
-      id: `${i}`,
-      method: 'GET',
-      url: `/users/${encodeURIComponent(ag.email)}?$select=displayName,jobTitle,mail,businessPhones,department`
-    }));
+    // Construir filtro OR para todos los emails
+    const filter = agents.map(a => `mail eq '${a.email}'`).join(' or ');
+    const url = `https://graph.microsoft.com/v1.0/users?$filter=${encodeURIComponent(filter)}&$select=displayName,jobTitle,mail,businessPhones,department`;
 
-    fetch(GRAPH_BATCH_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ requests: batchRequests })
+    fetch(url, {
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
-        if (!res.ok) throw new Error('Error en batch de Graph');
+        if (!res.ok) throw new Error('Error llamando a Microsoft Graph');
         return res.json();
       })
-      .then(batch => {
-        // Combina SQL + Graph
+      .then(data => {
+        // data.value es array de perfiles
         const map = {};
-        batch.responses.forEach(r => {
-          if (r.status === 200) map[r.id] = r.body;
-        });
+        data.value.forEach(u => { map[u.mail.toLowerCase()] = u; });
         setProfiles(
-          agents.map((ag, i) => {
-            const prof = map[`${i}`] || {};
+          agents.map(ag => {
+            const prof = map[ag.email.toLowerCase()] || {};
             return {
-              id:    ag.id,
-              name:  prof.displayName || ag.name,
-              role:  prof.jobTitle    || '—',
-              email: prof.mail        || ag.email,
+              id: ag.id,
+              name: prof.displayName || ag.name,
+              role: prof.jobTitle || '—',
+              email: prof.mail || ag.email,
               phone: prof.businessPhones?.[0] || '—',
               department: prof.department || '—',
               avatarUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(prof.displayName||ag.name)}&background=0D8ABC&color=fff`,
@@ -109,16 +91,14 @@ export default function AgentsPage() {
     return <Typography color="error">Error: {error}</Typography>;
   }
 
-  // 4. Renderiza las cards usando la misma estructura y estilos
+  // 3. Renderizar cards
   return (
     <Grid container spacing={3}>
       {profiles.map(agent => (
         <Grid item xs={12} sm={6} md={4} key={agent.id}>
           <Card sx={{ maxWidth: 345, m: 'auto', display: 'flex', flexDirection: 'column', height: '100%' }}>
             <CardHeader
-              avatar={
-                <Avatar alt={agent.name} src={agent.avatarUrl} sx={{ width: 56, height: 56 }} />
-              }
+              avatar={<Avatar alt={agent.name} src={agent.avatarUrl} sx={{ width: 56, height: 56 }} />}
               title={<Typography variant="h6">{agent.name}</Typography>}
               subheader={<Typography variant="body2" color="text.secondary">{agent.role}</Typography>}
             />
@@ -136,17 +116,17 @@ export default function AgentsPage() {
             </CardContent>
             <Box sx={{ bgcolor: '#f5f5f5', p: 1, display: 'flex', justifyContent: 'center' }}>
               {agent.socials.linkedin && (
-                <IconButton component="a" href={agent.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">
+                <IconButton component="a" href={agent.socials.linkedin} target="_blank" rel="noopener">
                   <LinkedInIcon />
                 </IconButton>
               )}
               {agent.socials.twitter && (
-                <IconButton component="a" href={agent.socials.twitter} target="_blank" rel="noopener" aria-label="Twitter">
+                <IconButton component="a" href={agent.socials.twitter} target="_blank" rel="noopener">
                   <TwitterIcon />
                 </IconButton>
               )}
               {agent.socials.facebook && (
-                <IconButton component="a" href={agent.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+                <IconButton component="a" href={agent.socials.facebook} target="_blank" rel="noopener">
                   <FacebookIcon />
                 </IconButton>
               )}
