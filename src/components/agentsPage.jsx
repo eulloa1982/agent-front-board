@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useGraphToken } from '../utils/useGraphToken';
 import {
   Grid,
@@ -24,21 +24,21 @@ const LOGIC_APP_URL =
   'https://prod-93.eastus.logic.azure.com:443/workflows/ff86d55fd06247718eb18d676e4e14a7/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=MLRAda9VPX1_7F81diahvx-VzTeI4minZWXOADT-Tlg';
 const GRAPH_BATCH_ENDPOINT = 'https://graph.microsoft.com/v1.0/$batch';
 
-// Divide array en chunks de tamaño dado
-function chunkArray(arr, size) {
+// Divide array en chunks de tamaño dado\ nfunction chunkArray(arr, size) {
+  function chunkArray(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
     chunks.push(arr.slice(i, i + size));
   }
   return chunks;
 }
-
 export default function AgentsPage() {
   const token = useGraphToken();
   const [agents, setAgents] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const photosFetched = useRef(false);
 
   // 1. Obtener agentes desde SQL vía Logic App y deduplicar
   useEffect(() => {
@@ -153,7 +153,8 @@ export default function AgentsPage() {
 
   // 3. Cargar fotos de perfil tras inicializar profiles
   useEffect(() => {
-    if (!token || profiles.length === 0) return;
+    if (!token || profiles.length === 0 || photosFetched.current) return;
+    photosFetched.current = true;
 
     const fetchPhotos = profiles.map((profile, idx) => {
       return fetch(
@@ -260,8 +261,16 @@ export default function AgentsPage() {
 
 
 
+/*
+function chunkArray(arr, size) {
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += size) {
+    chunks.push(arr.slice(i, i + size));
+  }
+  return chunks;
+}
 
-/*import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGraphToken } from '../utils/useGraphToken';
 import {
   Grid, Card, CardHeader, CardContent, Avatar,
