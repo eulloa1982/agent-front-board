@@ -109,7 +109,9 @@ export default function AgentsPage() {
         body: JSON.stringify({ requests })
       }).then(res => {
         if (!res.ok) return res.text().then(text => { throw new Error(text); });
+        console.log(res.json())
         return res.json();
+
       });
     });
 
@@ -146,7 +148,6 @@ export default function AgentsPage() {
           };
         });
         setProfiles(initialProfiles);
-        console.log(agents)
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
