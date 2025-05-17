@@ -6,11 +6,10 @@ import {
   Tabs,
   Tab,
   Box,
+  Grid,
 } from "@mui/material";
 //import ItemDialog from "./settings/itemDialog";
-import TableAgents from "./settings/tableAgents";
 import TableCategories from "./settings/tableCategories";
-import { useAgents } from "../utils/useAgents";
 import { useCategories } from "../utils/useCategories";
 
 const Settings = () => {
@@ -19,12 +18,7 @@ const Settings = () => {
   //const [editItem, setEditItem] = useState(null);
   //const [newName, setNewName] = useState("");
 
-  const {
-    agents,
-    //setAgents,
-    loading: agentsLoading,
-    error: agentsError,
-  } = useAgents();
+
   const {
     categories,
     //setCategories,
@@ -37,36 +31,33 @@ const Settings = () => {
   //const tabLabel = tab === 0 ? "Agente" : "Categoría";
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5" gutterBottom>
-          Status
-        </Typography>
+    <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+            <Card>
+            <CardContent>
+                <Typography variant="h5" gutterBottom>
+                Categories
+                </Typography>
 
-        <Tabs value={tab} onChange={(e, newValue) => setTab(newValue)}>
-          <Tab label="Agents" />
-          <Tab label="Categories" />
-        </Tabs>
+                <Tabs value={tab} onChange={(e, newValue) => setTab(newValue)}>
+                <Tab label="Categories" />
+                </Tabs>
 
-        <Box mt={2}>
-          
-          {tab === 0 ? (
-            <TableAgents
-              agents={agents}
-              loading={agentsLoading}
-              error={agentsError}
-            />
-          ) : (
-            <TableCategories
-              categories={categories}
-              loading={categoriesLoading}
-              error={categoriesError}
-            />
-          )}
-        </Box>
+                <Grid size={12} height='50%'>
+                
+                
+                    <TableCategories
+                    categories={categories}
+                    loading={categoriesLoading}
+                    error={categoriesError}
+                    />
+                
+                </Grid>
 
-      </CardContent>
-    </Card>
+            </CardContent>
+            </Card>
+        </Grid>
+    </Box>
   );
 };
 

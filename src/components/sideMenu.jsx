@@ -17,7 +17,7 @@ const menuItems = [
   { to: '/dashboard', icon: <DashboardIcon />, text: 'Dashboard' },
   { to: '/agents',    icon: <PeopleIcon />,    text: 'Agents'    },
   { to: '/reports',   icon: <TimelineIcon />,  text: 'Time Reports'   },
-  { to: '/status',  icon: <SettingsIcon />,  text: 'Status'  },
+  { to: '/status',  icon: <SettingsIcon />,  text: 'Categories'  },
 ];
 
 const SideMenu = () => {

@@ -20,6 +20,7 @@ const TableCategories = ({ categories, loading, error }) => {
         <TableRow>
           <TableCell>ID</TableCell>
           <TableCell>Name</TableCell>
+           <TableCell>Description</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -27,6 +28,7 @@ const TableCategories = ({ categories, loading, error }) => {
           <TableRow key={cat.id}>
             <TableCell>{cat.id}</TableCell>
             <TableCell>{cat.name}</TableCell>
+            <TableCell>{cat.description}</TableCell>
           </TableRow>
         ))}
       </TableBody>

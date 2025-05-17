@@ -18,7 +18,8 @@ export const useCategories = () => {
         const results = data['ResultSets']['Table1'] || [];
         const formattedCategories = results.map(category => ({
           id: category.category_id,
-          name: category.name
+          name: category.name,
+          description: category.description
         }));
         setCategories(formattedCategories);
       })
