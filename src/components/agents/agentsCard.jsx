@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardHeader, CardContent, Avatar, Typography, IconButton, Box
+  Card, CardHeader, CardContent, Avatar, Typography, IconButton, Box, Switch
 } from '@mui/material';
 import {
   Email as EmailIcon, Phone as PhoneIcon,
@@ -31,7 +31,7 @@ export default function AgentCard({ agent }) {
         <Typography variant="body2"><strong>Manager:</strong> {agent.manager}</Typography>
         <Typography variant="body2"><strong>Employee ID:</strong> {agent.employeeId}</Typography>
         <Typography variant="body2"><strong>Disabled?:</strong><Switch checked={!!agent.disabled} disabled /></Typography>
-        <Typography variant="body2"><strong>Supervisor?:</strong><Switch checked={!!agent.supervisor} disabled /></Typography>
+        <Typography variant="body2"><strong>Supervisor?:</strong><Switch checked={!!agent.is_supervisor} disabled /></Typography>
       </CardContent>
       <Box sx={{ bgcolor: '#f5f5f5', p: 1, display: 'flex', justifyContent: 'center' }}>
         {agent.socials.linkedin && <IconButton component="a" href={agent.socials.linkedin} target="_blank"><LinkedInIcon /></IconButton>}
