@@ -4,11 +4,11 @@ import { Box } from '@mui/material';
 
 export default function AgentTable({ rows, onSelect }) {
   const columns = [
-    { field: 'name', headerName: 'Nombre', flex: 1 },
+    { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'email', headerName: 'Email', flex: 1 },
-    { field: 'department', headerName: 'Departamento', flex: 1 },
-    { field: 'role', headerName: 'Cargo', flex: 1 },
-    { field: 'officeLocation', headerName: 'Ubicación', flex: 1 }
+    { field: 'department', headerName: 'Department', flex: 1 },
+    { field: 'role', headerName: 'Position', flex: 1 },
+    { field: 'officeLocation', headerName: 'Location', flex: 1 }
   ];
 
   return (

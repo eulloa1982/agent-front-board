@@ -11,7 +11,7 @@ export default function AgentCard({ agent }) {
   if (!agent) return null;
 
   return (
-    <Card sx={{ mt: 2 }}>
+    <Card>
       <CardHeader
         avatar={<Avatar src={agent.photoUrl || agent.avatarUrl} sx={{ width: 56, height: 56 }} />}
         title={<Typography variant="h6">{agent.name}</Typography>}
