@@ -51,31 +51,37 @@ export const useEnrichedAgents = () => {
         const agents = Array.from(unique.values());
         console.log("Agents from sql", agents)
         const chunks = chunkArray(agents, 15);
-        const batchResponses = await Promise.all(
-          chunks.map((group, groupIndex) => {
+
+       const batchResponses = await Promise.all(
+        chunks.map((group, groupIndex) => {
             const requests = group.map((ag, i) => ({
-              id: `${groupIndex}-${i}`,
-              method: 'GET',
-              url:
+            id: `${groupIndex}-${i}`,
+            method: 'GET',
+            url:
                 `/users/${encodeURIComponent(ag.email)}?` +
                 '$select=' +
                 [
-                  'displayName','givenName','surname','mail','userPrincipalName',
-                  'jobTitle','department','officeLocation','mobilePhone',
-                  'businessPhones','preferredLanguage','employeeId'
+                'displayName','givenName','surname','mail','userPrincipalName',
+                'jobTitle','department','officeLocation','mobilePhone',
+                'businessPhones','preferredLanguage','employeeId'
                 ].join(',') +
                 '&$expand=manager($select=displayName,mail)'
             }));
 
             return fetch(GRAPH_BATCH_ENDPOINT, {
-              method: 'POST',
-              headers: {
+            method: 'POST',
+            headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ requests })
-            }).then(res => res.ok ? res.json() : Promise.reject(res.statusText));
-          })
+            },
+            body: JSON.stringify({ requests })
+            }).then(async res => {
+            const json = await res.json();
+            if (!res.ok) throw new Error(JSON.stringify(json));
+            console.log(`📦 Batch #${groupIndex + 1} response:`, json); // 👈 Aquí haces el log de cada batch
+            return json;
+            });
+        })
         );
 
         const map = {};
