@@ -7,7 +7,7 @@ export const useAgents = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const fetchAgents = () => {
     setLoading(true);
     fetch(AGENTS_ENDPOINT)
       .then(res => {
@@ -15,17 +15,20 @@ export const useAgents = () => {
         return res.json();
       })
       .then(data => {
-        const results = data['ResultSets']['Table1'] || [];
+        const results = data['ResultSets']?.['Table1'] || data || [];
         const formattedAgents = results.map(agent => ({
-          id: agent.agent_id,
-          name: agent.name
+          id: agent.agent_id || agent.id,
+          name: agent.name,
+          supervisor: agent.isSupervisor,
+          disabled: agent.disabled_agent
         }));
         setAgents(formattedAgents);
-        console.log(formattedAgents)
       })
       .catch(err => setError(err))
       .finally(() => setLoading(false));
-  }, []);
+  };
 
-  return { agents, loading, error };
+  useEffect(fetchAgents, []);
+
+  return { agents, loading, error, refetchAgents: fetchAgents };
 };
