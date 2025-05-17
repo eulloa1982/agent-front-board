@@ -103,7 +103,7 @@ const DashboardCard = ({ title, children, height = 400 }) => (
 
   return (
     <>
-     <Grid size={3} item xs={8}>
+     <Grid size={4} item xs={8}>
         <DashboardCard title="Work Time per Agent (Tickets Closed and Resolved)" height={900}>
             <Box sx={{ flexGrow: 1, p: 2 }}>
                 <Grid container spacing={2} alignItems="center">
@@ -172,7 +172,7 @@ const DashboardCard = ({ title, children, height = 400 }) => (
     </Grid>
 
     <Grid size={8} item xs={8}>
-        <DashboardCard title="Ticket Details" height={900}>
+        <DashboardCard title="Not resolved tickets" height={900}>
             {filtros && <PowerAppsEmbed filtros={filtros} />}
 
         </DashboardCard>
