@@ -62,6 +62,7 @@ const TicketsByDayBarChart = () => {
         <Tooltip />
         <Bar dataKey="tickets_this_week" fill="#00bcd4" maxPointSize={5}>
           <LabelList dataKey="name" content={renderCustomizedLabel} />
+          <LabelList dataKey="tickets_this_week" position="insideTop" fill="#fff" fontSize={10} />
         </Bar>
       </BarChart>
     </ResponsiveContainer>

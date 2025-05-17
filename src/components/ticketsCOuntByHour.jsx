@@ -42,7 +42,7 @@ const TicketsCountByHour = () => {
         }}
       >
         <XAxis dataKey="hour_of_day" tick={{ fontSize: 10 }}/>
-        <YAxis  dataKey="ticket_count" tick={ false } activeDot={{ r: 8 }}/>
+        <YAxis  dataKey="ticket_count" tick={{ fontSize: 10 }} activeDot={{ r: 8 }}/>
         <Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
