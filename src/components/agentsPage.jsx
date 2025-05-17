@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, CircularProgress } from '@mui/material';
+import { Box, Typography, CircularProgress, Grid } from '@mui/material';
 import { useEnrichedAgents } from '../utils/useEnrichedAgents';
 import AgentTable from './agents/agentTable';
 import AgentCard from './agents/agentsCard';
@@ -17,10 +17,14 @@ export default function AgentsPage() {
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
-    <Box>
+    <Box sx={{ flexGrow: 1 }}>
       <Typography variant="h5" sx={{ mb: 2 }}>Registered agents</Typography>
-      <AgentTable rows={profiles} onSelect={setSelectedAgent} />
-      <AgentCard agent={selectedAgent} />
+      <Grid size={6} height='50%'>
+        <AgentTable rows={profiles} onSelect={setSelectedAgent} />
+      </Grid>
+      <Grid size={6} sx={{m:2}} height='50%'>
+        <AgentCard agent={selectedAgent} />
+      </Grid>
     </Box>
   );
 }
