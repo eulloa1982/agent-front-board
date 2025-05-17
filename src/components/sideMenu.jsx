@@ -16,9 +16,8 @@ const expandedWidth = 240;
 const menuItems = [
   { to: '/dashboard', icon: <DashboardIcon />, text: 'Dashboard' },
   { to: '/agents',    icon: <PeopleIcon />,    text: 'Agents'    },
-  { to: '/categories',icon: <CategoryIcon />,  text: 'Categories'},
-  { to: '/reports',   icon: <TimelineIcon />,  text: 'Reports'   },
-  { to: '/settings',  icon: <SettingsIcon />,  text: 'Settings'  },
+  { to: '/reports',   icon: <TimelineIcon />,  text: 'Time Reports'   },
+  { to: '/status',  icon: <SettingsIcon />,  text: 'Status'  },
 ];
 
 const SideMenu = () => {

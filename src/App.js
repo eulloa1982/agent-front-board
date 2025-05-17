@@ -9,6 +9,7 @@ import SideMenu from './components/sideMenu';
 import AgentsPage from './components/agentsPage';
 //import RequireAuth from './utils/requireAuth';
 import ReportsPage from './components/reportsPage';
+import Settings from './components/settings';
 // Componente para gestionar la autenticación
 const AuthComponent = ({ setAuthenticated }) => {
   const { instance, accounts } = useMsal();
@@ -69,6 +70,7 @@ const App = () => {
                     <Route path="/dashboard" element={<DashboardPage />} />
                       <Route path="/agents" element={<AgentsPage />} />
                       <Route path="/reports" element={<ReportsPage />} />
+                      <Route path="/status" element={<Settings />} />
                     {/* fallback */}
                     <Route path="*" element={<Navigate to="/dashboard" replace />} />
                   </Routes>
