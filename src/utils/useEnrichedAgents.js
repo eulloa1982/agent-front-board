@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useGraphToken } from './useGraphToken';
 
-const LOGIC_APP_URL = '...';
+const LOGIC_APP_URL = 'https://prod-93.eastus.logic.azure.com:443/workflows/ff86d55fd06247718eb18d676e4e14a7/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=MLRAda9VPX1_7F81diahvx-VzTeI4minZWXOADT-Tlg';
 const GRAPH_BATCH_ENDPOINT = 'https://graph.microsoft.com/v1.0/$batch';
 
 function chunkArray(arr, size) {
@@ -24,7 +24,7 @@ export const useEnrichedAgents = () => {
     const fetchAgents = async () => {
       try {
         const res = await fetch(LOGIC_APP_URL, { method: 'POST' });
-        if (!res.ok) throw new Error('Error cargando agentes de SQL');
+        if (!res.ok) throw new Error('Error fetching agents from SQL');
         const data = await res.json();
         const list = data.ResultSets?.Table1 || data.agents || [];
 
@@ -35,6 +35,8 @@ export const useEnrichedAgents = () => {
               id: a.agent_id,
               name: a.name,
               email: a.email,
+              disabled: a.disabled_agent,
+              is_supervisor: a.isSupervisor,
               socials: a.socials || {},
               categories: a.category_name ? [a.category_name] : []
             });

@@ -25,12 +25,12 @@ export default function AgentCard({ agent }) {
         <Typography sx={{ display: 'flex', alignItems: 'center', mt: 0.5 }}>
           <PhoneIcon fontSize="small" sx={{ mr: 1 }} />{agent.phone}
         </Typography>
-        <Typography variant="body2" sx={{ mt: 1 }}><strong>Ubicación:</strong> {agent.officeLocation}</Typography>
-        <Typography variant="body2"><strong>Departamento:</strong> {agent.department}</Typography>
-        <Typography variant="body2"><strong>Categorías:</strong> {agent.categories.join(', ')}</Typography>
+        <Typography variant="body2" sx={{ mt: 1 }}><strong>Location:</strong> {agent.officeLocation}</Typography>
+        <Typography variant="body2"><strong>Department:</strong> {agent.department}</Typography>
+        <Typography variant="body2"><strong>Categories:</strong> {agent.categories.join(', ')}</Typography>
         <Typography variant="body2"><strong>Manager:</strong> {agent.manager}</Typography>
-        <Typography variant="body2"><strong>Empleado ID:</strong> {agent.employeeId}</Typography>
-        <Typography variant="body2"><strong>Idioma:</strong> {agent.preferredLanguage}</Typography>
+        <Typography variant="body2"><strong>Employee ID:</strong> {agent.employeeId}</Typography>
+        <Typography variant="body2"><strong>Disabled?:</strong> {agent.disabled}</Typography>
       </CardContent>
       <Box sx={{ bgcolor: '#f5f5f5', p: 1, display: 'flex', justifyContent: 'center' }}>
         {agent.socials.linkedin && <IconButton component="a" href={agent.socials.linkedin} target="_blank"><LinkedInIcon /></IconButton>}
