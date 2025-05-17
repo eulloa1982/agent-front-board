@@ -19,11 +19,13 @@ export default function AgentsPage() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography variant="h5" sx={{ mb: 2 }}>Registered agents</Typography>
-      <Grid size={6} height='50%'>
-        <AgentTable rows={profiles} onSelect={setSelectedAgent} />
-      </Grid>
-      <Grid size={6} sx={{m:2}} height='50%'>
-        <AgentCard agent={selectedAgent} />
+      <Grid container spacing={2}>
+        <Grid size={6} height='50%'>
+          <AgentTable rows={profiles} onSelect={setSelectedAgent} />
+        </Grid>
+        <Grid size={6} sx={{m:2}} height='50%'>
+          <AgentCard agent={selectedAgent} />
+        </Grid>
       </Grid>
     </Box>
   );
