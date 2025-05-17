@@ -49,7 +49,7 @@ export const useEnrichedAgents = () => {
         });
 
         const agents = Array.from(unique.values());
-
+        console.log("Agents from sql", agents)
         const chunks = chunkArray(agents, 15);
         const batchResponses = await Promise.all(
           chunks.map((group, groupIndex) => {
@@ -105,7 +105,7 @@ export const useEnrichedAgents = () => {
         });
 
         setProfiles(enriched);
-
+        console.log("Agents all profile", enriched)
         // Fetch photos once
         const photoResults = await Promise.all(
           enriched.map((p, idx) =>
