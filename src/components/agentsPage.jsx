@@ -23,7 +23,7 @@ export default function AgentsPage() {
         <Grid size={6} height='50%'>
           <AgentTable rows={profiles} onSelect={setSelectedAgent} />
         </Grid>
-        <Grid size={6} sx={{m:2}} height='50%'>
+        <Grid size={6} height='50%'>
           <AgentCard agent={selectedAgent} />
         </Grid>
       </Grid>
