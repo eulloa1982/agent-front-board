@@ -30,7 +30,8 @@ export default function AgentCard({ agent }) {
         <Typography variant="body2"><strong>Categories:</strong> {agent.categories.join(', ')}</Typography>
         <Typography variant="body2"><strong>Manager:</strong> {agent.manager}</Typography>
         <Typography variant="body2"><strong>Employee ID:</strong> {agent.employeeId}</Typography>
-        <Typography variant="body2"><strong>Disabled?:</strong> {agent.disabled}</Typography>
+        <Typography variant="body2"><strong>Disabled?:</strong><Switch checked={!!agent.disabled} disabled /></Typography>
+        <Typography variant="body2"><strong>Supervisor?:</strong><Switch checked={!!agent.supervisor} disabled /></Typography>
       </CardContent>
       <Box sx={{ bgcolor: '#f5f5f5', p: 1, display: 'flex', justifyContent: 'center' }}>
         {agent.socials.linkedin && <IconButton component="a" href={agent.socials.linkedin} target="_blank"><LinkedInIcon /></IconButton>}

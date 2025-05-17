@@ -11,14 +11,14 @@ export default function AgentsPage() {
   if (loading) return (
     <Box sx={{ textAlign: 'center', mt: 4 }}>
       <CircularProgress />
-      <Typography>Cargando agentes…</Typography>
+      <Typography>Loading agents…</Typography>
     </Box>
   );
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
     <Box>
-      <Typography variant="h5" sx={{ mb: 2 }}>Agentes registrados</Typography>
+      <Typography variant="h5" sx={{ mb: 2 }}>Registered agents</Typography>
       <AgentTable rows={profiles} onSelect={setSelectedAgent} />
       <AgentCard agent={selectedAgent} />
     </Box>
