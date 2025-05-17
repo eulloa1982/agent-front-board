@@ -1,5 +1,5 @@
 // utils/useEnrichedAgents.js
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useGraphToken } from './useGraphToken';
 
 const LOGIC_APP_URL = '...';
@@ -18,7 +18,7 @@ export const useEnrichedAgents = () => {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const photosFetched = useRef(false);
+  //const photosFetched = useRef(false);
 
   useEffect(() => {
     const fetchAgents = async () => {

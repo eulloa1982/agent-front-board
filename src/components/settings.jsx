@@ -6,7 +6,6 @@ import {
   Tabs,
   Tab,
   Box,
-  Button,
 } from "@mui/material";
 //import ItemDialog from "./settings/itemDialog";
 import TableAgents from "./settings/tableAgents";
@@ -22,20 +21,20 @@ const Settings = () => {
 
   const {
     agents,
-    setAgents,
+    //setAgents,
     loading: agentsLoading,
     error: agentsError,
   } = useAgents();
   const {
     categories,
-    setCategories,
+    //setCategories,
     loading: categoriesLoading,
     error: categoriesError,
   } = useCategories();
 
   
 
-  const tabLabel = tab === 0 ? "Agente" : "Categoría";
+  //const tabLabel = tab === 0 ? "Agente" : "Categoría";
 
   return (
     <Card>
