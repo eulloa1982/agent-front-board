@@ -50,7 +50,7 @@ const DashboardPage = () => {
           </DashboardCard>
         </Grid>
 
-        <Grid size={4 }>
+        <Grid size={4}>
           <DashboardCard title="Tickets by Agent">
             <TicketsByDayBarChart />
           </DashboardCard>

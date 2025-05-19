@@ -36,9 +36,9 @@ const CategoryPieChart = () => {
   
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" aspect={950 / 350}>
       <PieChart margin={{
-          top: 80,
+          top: 150,
           right: 10,
           left: 0,
           bottom: 0,

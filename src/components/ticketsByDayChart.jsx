@@ -47,13 +47,13 @@ const TicketsByDayBarChart = () => {
 
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" aspect={850 / 550}>
       <BarChart data={tickets} 
-          height={300}
+          height={220}
             margin={{
-            top: 5,
-            right: 30,
-            left: 20,
+            top: 20,
+            right: 10,
+            left: 0,
             bottom: 5,
           }}>
         <CartesianGrid strokeDasharray="3 3" />
