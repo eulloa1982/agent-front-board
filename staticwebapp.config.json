@@ -1,8 +1,12 @@
 {
   "routes": [
     {
-      "route": "/*",
+      "route": "/admin/*",
       "allowedRoles": ["cservices_webapp_group"]
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["authenticated"]
     }
   ]
 }
