@@ -5,7 +5,7 @@
       "allowedRoles": ["cservices_webapp_group"]
     },
     {
-      "route": "/*",
+      "route": "/admin/*",
       "allowedRoles": ["authenticated"]
     }
   ]
