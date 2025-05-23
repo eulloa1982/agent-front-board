@@ -3,10 +3,6 @@
     {
       "route": "/*",
       "allowedRoles": ["cservices_webapp_group"]
-    },
-    {
-      "route": "/admin/*",
-      "allowedRoles": ["authenticated"]
     }
   ]
 }
