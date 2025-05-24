@@ -55,7 +55,7 @@ const AuthComponent = ({ setAuthenticated }) => {
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
 const isInGroup = useGroupValidation();
-
+console.log(isInGroup)
   return (
     <MsalProviderWrapper>
        <BrowserRouter>
