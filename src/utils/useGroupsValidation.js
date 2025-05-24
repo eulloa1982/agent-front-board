@@ -1,25 +1,45 @@
-import { useEffect } from "react";
-import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "./azureAuthUtil";
 
-const groupId = "bb7d859f-7032-405c-9dee-73cde7a6fb42"; // Object ID de 'cservices-group'
+import { useState, useEffect } from 'react';
+import { useMsal } from '@azure/msal-react';
 
-function useGroupValidation() {
+const ALLOWED_GROUP_IDS = [
+  'bb7d859f-7032-405c-9dee-73cde7a6fb42' // ← tu ID del grupo cservices-group
+];
+
+const useGroupValidation = () => {
   const { instance, accounts } = useMsal();
+  const [isInGroup, setIsInGroup] = useState(false);
 
   useEffect(() => {
-    if (accounts.length > 0) {
-      instance.acquireTokenSilent({ ...loginRequest, account: accounts[0] })
-        .then(response => {
-          const claims = response.idTokenClaims;
-          const userGroups = claims.groups || [];
+    const checkGroups = async () => {
+      if (accounts.length > 0) {
+        const account = accounts[0];
 
-          if (!userGroups.includes(groupId)) {
-            // Redirigir o bloquear acceso
-            window.location.href = "/unauthorized";
-          }
-        })
-        .catch(err => console.error("Token error:", err));
-    }
+        try {
+          const response = await instance.acquireTokenSilent({
+            scopes: ['User.Read'],
+            account: account
+          });
+
+          const idToken = response.idToken;
+          const tokenPayload = JSON.parse(atob(idToken.split('.')[1]));
+
+          const userGroups = tokenPayload.groups || [];
+
+          const isAllowed = userGroups.some(groupId => ALLOWED_GROUP_IDS.includes(groupId));
+          setIsInGroup(isAllowed);
+
+        } catch (err) {
+          console.error("Group validation error:", err);
+          setIsInGroup(false);
+        }
+      }
+    };
+
+    checkGroups();
   }, [accounts, instance]);
-}
+
+  return isInGroup;
+};
+
+export default useGroupValidation;
