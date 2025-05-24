@@ -1,4 +1,4 @@
-/*import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CssBaseline, CircularProgress, Button, Box } from '@mui/material';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
@@ -54,7 +54,7 @@ const AuthComponent = ({ setAuthenticated }) => {
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
-useGroupValidation();
+const isInGroup = useGroupValidation();
 
   return (
     <MsalProviderWrapper>
@@ -86,9 +86,9 @@ useGroupValidation();
 };
 
 export default App;
-*/
 
-import React from 'react';
+
+/*import React from 'react';
 import { CssBaseline, Box } from '@mui/material';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useIsAuthenticated } from '@azure/msal-react';
@@ -151,5 +151,5 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;*/
 
