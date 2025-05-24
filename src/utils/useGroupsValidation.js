@@ -24,6 +24,9 @@ const useGroupValidation = () => {
           const idToken = response.idToken;
           const tokenPayload = JSON.parse(atob(idToken.split('.')[1]));
 
+            console.log("Decoded ID Token payload:", tokenPayload);
+            console.log("Grupos recibidos en el token:", tokenPayload.groups);
+            
           const userGroups = tokenPayload.groups || [];
 
           const isAllowed = userGroups.some(groupId => ALLOWED_GROUP_IDS.includes(groupId));
