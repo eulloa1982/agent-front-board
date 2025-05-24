@@ -64,7 +64,7 @@ console.log(isInGroup)
           <SideMenu />
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <DashboardLayout>
-               {authenticated ? (
+               {!authenticated ? (
                 <AuthComponent setAuthenticated={setAuthenticated} />
                ) : (
                 <Routes>
