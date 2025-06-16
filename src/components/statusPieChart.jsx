@@ -1,7 +1,5 @@
 // src/components/StatusPieChart.jsx
-import { Grid, Badge, Typography, Box, Divider, CardContent, Card } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { Grid, Badge, Typography, Box, Divider, CardContent } from '@mui/material';
 
 const COLORS = {
   New: '#15A4FF',
@@ -11,16 +9,6 @@ const COLORS = {
   Closed: '#999999'
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
-}));
 
 const StatusPieChart = ({ grouped, total, selectedAgent, startDate, endDate }) => {
   const filteredGrouped = selectedAgent
