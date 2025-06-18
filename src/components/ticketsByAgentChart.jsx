@@ -26,10 +26,10 @@ const TicketsByAgentBarChart = () => {
   }, [user]);
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={tickets} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart data={tickets} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+        <XAxis dataKey="name" tick={{ fontSize: 10, angle: -15 }} interval={0} />
         <YAxis allowDecimals={false} />
         <Tooltip />
         <Legend />

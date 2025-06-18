@@ -132,13 +132,13 @@ const DashboardPage = () => {
 
      <Grid container spacing={2} mb={2} mt={2}>
 
-        <Grid size={4}>
+        <Grid size={6}>
           <DashboardCard title="Tickets by Hour (Average in the week)">
             <TicketsCountByHour />
           </DashboardCard>
         </Grid>
 
-        <Grid size={8}>
+        <Grid size={6}>
           <DashboardCard title="Tickets Created in the week">
             <TicketsByDayBarChart />
           </DashboardCard>

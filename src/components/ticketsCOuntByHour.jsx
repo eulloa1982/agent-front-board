@@ -31,7 +31,7 @@ const TicketsCountByHour = () => {
   }, [user]);
 
   return (
-     <ResponsiveContainer width="100%" height="100%" aspect={750 / 350}>
+     <ResponsiveContainer width="100%" height="100%" >
       <AreaChart
         data={tickets}
         margin={{

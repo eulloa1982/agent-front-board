@@ -39,15 +39,16 @@ const TicketsByDayBarChart = () => {
       <BarChart
         data={tickets}
         layout="vertical"
-        margin={{ top: 20, right: 30, left: 80, bottom: 5 }}
+        margin={{ top: 20, right: 30, left: 40, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis type="number" allowDecimals={false} />
         <YAxis
           type="category"
           dataKey="name"
-          width={150}
-          tick={{ fontSize: 12 }}
+          width={100}
+          tick={{ fontSize: 10, angle: -15 }}
+          interval={0} 
         />
         <Tooltip />
         <Bar dataKey="tickets_this_week" fill="#00bcd4" barSize={20}>
